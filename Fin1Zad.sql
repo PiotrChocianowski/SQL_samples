@@ -1,16 +1,16 @@
 /*jaki procent klientów ma daną liczbę zleceń*/
 select 
-   orders1
-	,count(customer_id) 				   as customers1
+   liczba_zlecen 
+	,count(customer_id) as customers1
 	,total_customers
-	,round((count(customer_id)/total_customers)*100,2) as 'wynik w %'
-from 
+	,round((count(customer_id)/total_customers)*100,2) as 'wynik w %' 
+	from 
    ( 
-select  
+   select  
    customer_id
-   ,count(order_id) as orders1
+   ,count(order_id) as liczba_zlecen
    ,(select count(distinct customer_id) from orders) as total_customers
-from orders 
+   from orders 
    group by 1
    ) o
    group by 1
